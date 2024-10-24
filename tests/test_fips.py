@@ -173,7 +173,7 @@ def test_openssl_fips_hashes(container_per_test: ContainerData):
 
 
 @pytest.mark.parametrize(
-    "container_per_test", FIPS_GNUTLS_TESTER_IMAGES, indirect=True
+    "container_per_test", FIPS_TESTER_IMAGES, indirect=True
 )
 def test_gnutls_binary(container_per_test: ContainerData) -> None:
     """Check that a binary linked against GnuTLS obeys the host's FIPS mode
@@ -219,7 +219,7 @@ def test_gnutls_binary(container_per_test: ContainerData) -> None:
 
 
 @pytest.mark.parametrize(
-    "container_per_test", FIPS_GCRYPT_TESTER_IMAGES, indirect=True
+    "container_per_test", FIPS_TESTER_IMAGES, indirect=True
 )
 def test_gcrypt_binary(container_per_test: ContainerData) -> None:
     """Check that a binary linked against gcrypt obeys the host's FIPS mode
@@ -288,7 +288,7 @@ def test_gcrypt_binary(container_per_test: ContainerData) -> None:
 
 
 @pytest.mark.parametrize(
-    "container_per_test", FIPS_GCRYPT_TESTER_IMAGES, indirect=True
+    "container_per_test", FIPS_TESTER_IMAGES, indirect=True
 )
 def test_gpgconf_binary(container_per_test: ContainerData) -> None:
     """validate that gpgconf lists fips-mode"""
