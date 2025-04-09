@@ -162,7 +162,7 @@ def openssl_fips_hashes_test_fnct(container_per_test: ContainerData) -> None:
 
     if OS_VERSION == "15.6":
         # Removal of default version openSSL3
-        c.check_output("zypper rm --clean-deps openssl")
+        c.check_output("zypper --non-interactive rm --clean-deps openssl")
 
         # Download and extract the openSSL1.1 legacy version
         arch = LOCALHOST.system_info.arch
