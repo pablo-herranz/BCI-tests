@@ -42,12 +42,6 @@ DOCKERFILE_GCRYPT = """WORKDIR /src/
 COPY tests/files/fips-test-gcrypt.c /src/
 """
 
-DOCKERFILE_15SP6_OPENSSL11 = """WORKDIR /src/
-COPY tests/files/fips-test.c /src/
-
-**install legacy package here**
-"""
-
 _zypp_credentials_dir: str = "/etc/zypp/credentials.d"
 
 CONTAINER_IMAGES_WITH_ZYPPER = []
