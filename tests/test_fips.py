@@ -155,21 +155,21 @@ def openssl_fips_hashes_test_fnct(container_per_test: ContainerData) -> None:
         )
 
     for digest in FIPS_DIGESTS:
-        dev_null_digest = c.check_output(
-            f"openssl {digest} /dev/null"
-        )
+        dev_null_digest = c.check_output(f"openssl {digest} /dev/null")
         assert f"= {NULL_DIGESTS[digest]}" in dev_null_digest, (
             f"unexpected digest of hash {digest}: {dev_null_digest}"
         )
-    
-    if OS_VERSION == '15.6':
+
+    if OS_VERSION == "15.6":
         # Removal of default version openSSL3
         c.check_output("zypper rm --clean-deps openssl")
 
         # Download and extract the openSSL1.1 legacy version
         arch = LOCALHOST.system_info.arch
         legacy_repourl = f"https://download.suse.de/ibs/SUSE/Products/SLE-Module-Legacy/15-SP6/{arch}/product"
-        rpm_name = c.run(f"curl -Lsk \"{legacy_repourl}/INDEX.gz\" | gzip -cd | grep -o 'openssl-1_1[^[:space:]]*\.rpm'")
+        rpm_name = c.run(
+            f"curl -Lsk \"{legacy_repourl}/INDEX.gz\" | gzip -cd | grep -o 'openssl-1_1[^[:space:]]*\\.rpm'"
+        )
         c.check_output(f"curl -skLO {legacy_repourl}/{arch}/{rpm_name}")
         c.check_output(f"rpm2cpio {rpm_name} | cpio -idmv")
         c.check_output("cp ./usr/bin/openssl-1_1 /usr/local/bin")
@@ -184,9 +184,7 @@ def openssl_fips_hashes_test_fnct(container_per_test: ContainerData) -> None:
             )
 
         for digest in FIPS_DIGESTS:
-            dev_null_digest = c.check_output(
-                f"openssl-1_1 {digest} /dev/null"
-            )
+            dev_null_digest = c.check_output(f"openssl-1_1 {digest} /dev/null")
             assert f"= {NULL_DIGESTS[digest]}" in dev_null_digest, (
                 f"unexpected digest of hash {digest}: {dev_null_digest}"
             )
