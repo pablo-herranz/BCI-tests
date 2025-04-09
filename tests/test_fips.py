@@ -161,7 +161,7 @@ def openssl_fips_hashes_test_fnct(container_per_test: ContainerData) -> None:
         # Download and extract the openSSL1.1 legacy version
         arch = LOCALHOST.system_info.arch
         legacy_repourl = f"https://download.suse.de/ibs/SUSE/Products/SLE-Module-Legacy/15-SP6/{arch}/product"
-        rpm_name = c.run(
+        rpm_name = c.check_output(
             f"curl -Lsk \"{legacy_repourl}/INDEX.gz\" | gzip -cd | grep -o 'openssl-1_1[^[:space:]]*\\.rpm'"
         )
         c.check_output(f"curl -skLO {legacy_repourl}/{arch}/{rpm_name}")
