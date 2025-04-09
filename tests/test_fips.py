@@ -42,6 +42,7 @@ DOCKERFILE_GCRYPT = """WORKDIR /src/
 COPY tests/files/fips-test-gcrypt.c /src/
 """
 
+
 _zypp_credentials_dir: str = "/etc/zypp/credentials.d"
 
 CONTAINER_IMAGES_WITH_ZYPPER = []
@@ -112,7 +113,6 @@ def test_openssl_binary(container_per_test: ContainerData) -> None:
       with the expected error message.
 
     """
-
     container_per_test.connection.check_output(
         "zypper --gpg-auto-import-keys -n ref && zypper -n install gcc libopenssl-devel && zypper -n clean &&"
         "gcc -O2 fips-test.c -Wall -Wextra -Wpedantic -lcrypto -lssl -o fips-test && "
