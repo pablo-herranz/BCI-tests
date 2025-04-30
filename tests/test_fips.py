@@ -43,6 +43,7 @@ COPY tests/files/fips-test-gcrypt.c /src/
 """
 
 DOCKERFILE_OPENSSL_1_1_15SP6 = """
+FROM registry.suse.com/bci/bci-base-fips:15.6
 ENV ADDITIONAL_MODULES sle-module-legacy
 
 RUN --mount=type=secret,id=SCCcredentials zypper -n rm --clean-deps openssl && zypper -n in openssl-1_1 && zypper -n clean
